@@ -1,0 +1,26 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  hint?: string;
+  accent?: "cyan" | "lime" | "fg";
+}
+
+const { label, value, hint, accent = "fg" } = Astro.props;
+
+const accents = {
+  cyan: "text-accent",
+  lime: "text-accent-2",
+  fg: "text-fg",
+};
+---
+
+<div class="surface p-5" data-reveal>
+  <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-subtle">
+    {label}
+  </p>
+  <p class={`mt-2 text-2xl font-semibold tabular-nums md:text-3xl ${accents[accent]}`}>
+    {value}
+  </p>
+  {hint && <p class="mt-1 text-xs text-muted">{hint}</p>}
+</div>

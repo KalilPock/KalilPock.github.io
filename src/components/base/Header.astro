@@ -1,0 +1,112 @@
+---
+import { site } from "@data/site";
+---
+
+<header
+  class="sticky top-0 z-30 border-b border-border/70 bg-bg/70 backdrop-blur-xl"
+>
+  <div class="wrap relative flex h-16 items-center justify-between">
+    <a
+      href="/"
+      class="group flex items-center gap-1 font-mono text-sm tracking-tight"
+      aria-label={`${site.handle} — início`}
+    >
+      <span class="text-accent">~</span>
+      <span class="text-subtle">/</span>
+      <span class="text-fg">kalilpock</span>
+      <span
+        class="ml-0.5 inline-block h-4 w-[7px] translate-y-[1px] animate-pulse bg-accent/80"
+      ></span>
+    </a>
+
+    <input
+      id="nav-toggle"
+      type="checkbox"
+      class="peer sr-only md:hidden"
+      aria-label="Alternar menu de navegação"
+    />
+
+    <label
+      for="nav-toggle"
+      class="cursor-pointer rounded-md p-2 text-muted transition-colors hover:text-fg peer-checked:text-accent md:hidden"
+    >
+      <span class="sr-only">Abrir menu</span>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        aria-hidden="true"
+        class="peer-checked:hidden"
+      >
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        aria-hidden="true"
+        class="hidden peer-checked:block"
+      >
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </label>
+
+    <nav
+      class="absolute inset-x-0 top-full hidden flex-col gap-2 rounded-b-xl border-b border-border bg-bg/95 p-4 backdrop-blur-xl peer-checked:flex md:static md:ml-auto md:flex md:flex-row md:items-center md:gap-1 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none"
+      aria-label="Principal"
+    >
+      <ul class="flex flex-col gap-1 md:flex-row md:items-center md:gap-1">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="block rounded-md px-3 py-2 text-sm text-muted transition-colors hover:bg-white/5 hover:text-fg md:py-1.5"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href={site.links.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 rounded-md border border-border px-3 py-2 text-sm text-fg transition-colors hover:border-accent/50 hover:text-accent md:ml-1 md:py-1.5"
+        data-cursor="link"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+        </svg>
+        GitHub
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  if (toggle instanceof HTMLInputElement) {
+    const close = () => {
+      toggle.checked = false;
+    };
+    document.querySelectorAll("#nav-toggle ~ nav a").forEach((link) => {
+      link.addEventListener("click", close);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.checked) {
+        close();
+        document.querySelector<HTMLLabelElement>('label[for="nav-toggle"]')?.focus();
+      }
+    });
+  }
+</script>

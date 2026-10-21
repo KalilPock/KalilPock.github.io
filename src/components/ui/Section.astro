@@ -1,0 +1,13 @@
+---
+interface Props {
+  id: string;
+  label?: string;
+  class?: string;
+}
+
+const { id, label, class: className = "" } = Astro.props;
+---
+
+<section id={id} class={`wrap py-20 md:py-28 ${className}`} aria-label={label}>
+  <slot />
+</section>

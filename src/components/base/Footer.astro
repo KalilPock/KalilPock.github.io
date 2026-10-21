@@ -1,0 +1,40 @@
+---
+import { site } from "@data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-border/70 py-10">
+  <div
+    class="wrap flex flex-col gap-8 md:flex-row md:items-center md:justify-between"
+  >
+    <div>
+      <p class="font-mono text-sm">
+        <span class="text-accent">~</span><span class="text-subtle">/</span>kalilpock
+      </p>
+      <p class="mt-1 text-sm text-subtle">full stack · ensino · homelab</p>
+    </div>
+
+    <nav aria-label="Rodapé" class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+      {
+        site.nav.map((item) => (
+          <a href={item.href} class="transition-colors hover:text-fg">
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={site.links.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="transition-colors hover:text-fg"
+      >
+        GitHub
+      </a>
+    </nav>
+
+    <p class="text-xs text-subtle">
+      © {year} {site.handle} · feito com Astro &amp; Tailwind
+    </p>
+  </div>
+</footer>

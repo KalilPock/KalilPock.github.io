@@ -1,0 +1,47 @@
+---
+interface Props {
+  href?: string;
+  type?: "button" | "submit";
+  variant?: "primary" | "ghost" | "quiet";
+  external?: boolean;
+  magnetic?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  type = "button",
+  variant = "primary",
+  external = false,
+  magnetic = true,
+  class: className = "",
+} = Astro.props;
+
+const base =
+  "inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors duration-200 focus-visible:outline-none";
+
+const variants = {
+  primary: "bg-accent text-[#04131a] hover:bg-accent/90",
+  ghost:
+    "border border-border bg-white/[0.02] text-fg hover:border-accent/50 hover:text-accent",
+  quiet: "text-muted hover:text-fg",
+};
+
+const classes = `${base} ${variants[variant]} ${className}`;
+const magneticAttr = magnetic ? "0.2" : undefined;
+const externalAttrs = external
+  ? { target: "_blank", rel: "noopener noreferrer" }
+  : {};
+---
+
+{
+  href ? (
+    <a href={href} class={classes} data-magnetic={magneticAttr} {...externalAttrs}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} data-magnetic={magneticAttr}>
+      <slot />
+    </button>
+  )
+}

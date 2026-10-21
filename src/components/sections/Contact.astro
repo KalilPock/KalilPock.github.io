@@ -1,0 +1,41 @@
+---
+import { site } from "@data/site";
+import Section from "@components/ui/Section.astro";
+import Button from "@components/ui/Button.astro";
+---
+
+<Section id="contato" label="Contato">
+  <div class="surface relative overflow-hidden p-8 md:p-12" data-reveal>
+    <div
+      class="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+
+    <p class="eyebrow">05 — contato</p>
+    <h2 class="mt-3 max-w-xl text-3xl md:text-4xl">Vamos conversar</h2>
+    <p class="mt-4 max-w-xl text-base text-muted">
+      Estou aberto a projetos como desenvolvedor full stack, consultoria e trocas
+      sobre back-end, ensino técnico e infraestrutura.
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3">
+      <Button href={site.links.github} external variant="primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+        </svg>
+        Abrir o GitHub
+      </Button>
+
+      <Button href={site.links.linkedin} external variant="ghost">
+        LinkedIn
+      </Button>
+
+      <Button href={`mailto:${site.email}`} variant="ghost">
+        E-mail
+      </Button>
+    </div>
+
+    <p class="mt-5 font-mono text-xs text-subtle">{site.email}</p>
+  </div>
+</Section>

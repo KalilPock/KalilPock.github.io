@@ -1,0 +1,30 @@
+{
+  "name": "kalilpock-portfolio",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "scripts": {
+    "predev": "node scripts/fetch-homelab.mjs --if-env",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "prebuild": "node scripts/fetch-homelab.mjs --if-env",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "fetch:homelab": "node scripts/fetch-homelab.mjs --write"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.1",
+    "motion": "^14.5.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@tailwindcss/vite": "^4.3.3",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3"
+  }
+}

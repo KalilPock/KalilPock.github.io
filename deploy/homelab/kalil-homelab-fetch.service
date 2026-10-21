@@ -1,0 +1,21 @@
+[Unit]
+Description=Atualiza as estatísticas do homelab no portfólio
+Documentation=file:///opt/kalilpock/portfolio/deploy/homelab/README.md
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=kalilpock
+Group=kalilpock
+WorkingDirectory=/opt/kalilpock/portfolio
+EnvironmentFile=/etc/kalil-homelab.env
+ExecStart=/opt/kalilpock/portfolio/deploy/homelab/update-stats.sh
+TimeoutStartSec=120
+
+# endurecimento básico
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/opt/kalilpock/portfolio

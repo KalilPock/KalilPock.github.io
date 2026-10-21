@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Tokens — fonte única de verdade da identidade visual.
+   --font-* vêm da Fonts API do Astro (ver astro.config.mjs).
+--------------------------------------------------------------------------- */
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+@theme {
+  /* superfícies */
+  --color-bg: #05070a;
+  --color-bg-elev: #0a0f17;
+  --color-bg-elev-2: #0e1520;
+  --color-border: #1b2635;
+  --color-border-strong: #2a3a4f;
+
+  /* texto */
+  --color-fg: #e6edf3;
+  --color-muted: #8b9bb0;
+  --color-subtle: #5f7189;
+
+  /* acentos */
+  --color-accent: #22d3ee;
+  --color-accent-2: #a3e635;
+  --color-warn: #fbbf24;
+  --color-danger: #f87171;
+
+  /* raios */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* movimento */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 500ms;
+
+  /* sombras */
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.03) inset,
+    0 24px 48px -28px rgb(0 0 0 / 0.85);
+  --shadow-glow: 0 0 0 1px rgb(34 211 238 / 0.22),
+    0 0 42px -10px rgb(34 211 238 / 0.4);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
+  }
+
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: var(--color-border-strong) transparent;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-bg);
+    background-image:
+      radial-gradient(60rem 40rem at 50% -18%, rgb(34 211 238 / 0.08), transparent 70%),
+      radial-gradient(40rem 30rem at 100% 8%, rgb(163 230 53 / 0.05), transparent 70%);
+    background-repeat: no-repeat;
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 650;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 32%, transparent);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  section[id] {
+    scroll-margin-top: 6.5rem;
+  }
+
+  code,
+  kbd,
+  pre {
+    font-family: var(--font-mono);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilidades de layout / superfície
+--------------------------------------------------------------------------- */
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1140px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  .surface {
+    background: color-mix(in oklab, var(--color-bg-elev) 82%, transparent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(10px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-fg) 20%,
+      var(--color-accent) 75%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-backdrop {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 52px 52px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      #000 30%,
+      transparent 75%
+    );
+    mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      #000 30%,
+      transparent 75%
+    );
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 200;
+    transform: translateY(-160%);
+    border-radius: var(--radius-md);
+    background: var(--color-accent);
+    color: #04131a;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline-offset: 3px;
+  }
+
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--duration-base) var(--ease-out-expo);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Efeitos — camadas
+--------------------------------------------------------------------------- */
+@layer utilities {
+  .fx-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  .page-layer {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Cursor customizado: ativa só quando o JS detecta ponteiro fino + movimento */
+  html.has-cursor,
+  html.has-cursor *:not(input):not(textarea):not(select):not(option) {
+    cursor: none;
+  }
+  html.has-cursor input,
+  html.has-cursor textarea,
+  html.has-cursor select {
+    cursor: auto;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    pointer-events: none;
+    border-radius: 9999px;
+    opacity: 0;
+    will-change: transform;
+  }
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    background: var(--color-accent);
+    transition: opacity 180ms linear;
+  }
+  .cursor-ring {
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    border: 1px solid color-mix(in oklab, var(--color-accent) 60%, transparent);
+    transition:
+      opacity var(--duration-base) linear,
+      width var(--duration-base) var(--ease-out-expo),
+      height var(--duration-base) var(--ease-out-expo),
+      margin var(--duration-base) var(--ease-out-expo),
+      background-color var(--duration-base) var(--ease-out-expo),
+      border-color var(--duration-base) var(--ease-out-expo);
+  }
+  html.cursor-link .cursor-ring {
+    width: 54px;
+    height: 54px;
+    margin: -27px 0 0 -27px;
+    background: color-mix(in oklab, var(--color-accent) 12%, transparent);
+    border-color: var(--color-accent);
+  }
+  html.cursor-text .cursor-ring {
+    width: 2px;
+    height: 26px;
+    margin: -13px 0 0 -1px;
+    border-radius: 2px;
+    background: var(--color-accent);
+    border-color: transparent;
+  }
+
+  /* Reveal: só esconde se o JS estiver ativo e movimento permitido.
+     O inline script adiciona .js e remove após 2.5s se o bundle falhar. */
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* Reduced motion — desliga tudo que é decorativo */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+  .fx-canvas {
+    display: none;
+  }
+}

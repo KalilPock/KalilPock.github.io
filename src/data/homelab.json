@@ -1,0 +1,17 @@
+{
+  "available": false,
+  "source": null,
+  "fetchedAt": null,
+  "reason": "ainda não coletado",
+  "showDomains": false,
+  "queries": {
+    "today": 0,
+    "blocked": 0,
+    "blockedPct": 0,
+    "uniqueDomains": 0,
+    "clients": 0,
+    "forwarded": 0,
+    "cached": 0
+  },
+  "topBlocked": []
+}

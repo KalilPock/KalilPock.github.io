@@ -1,0 +1,95 @@
+---
+import { projects } from "@data/projects";
+import type { ProjectCategory } from "@data/projects";
+import Section from "@components/ui/Section.astro";
+import SectionHeading from "@components/ui/SectionHeading.astro";
+import Tag from "@components/ui/Tag.astro";
+
+const categoryLabels: Record<ProjectCategory, string> = {
+  fullstack: "full stack",
+  homelab: "homelab",
+  "ci-cd": "ci/cd",
+};
+---
+
+<Section id="projetos" label="Projetos">
+  <SectionHeading
+    eyebrow="03 — projetos"
+    title="Projetos e experimentos"
+    description="Do sistema de anotações ao homelab que roda meus serviços."
+  />
+
+  <div class="mt-12 grid gap-5 md:grid-cols-2">
+    {
+      projects.map((project) => (
+        <article
+          class="surface group relative overflow-hidden p-6"
+          data-reveal
+          data-tilt
+          data-tilt-max="6"
+        >
+          <div
+            data-tilt-glare
+            class="pointer-events-none absolute inset-0 rounded-[var(--radius-lg)] opacity-0"
+            style="transition: opacity 200ms ease"
+            aria-hidden="true"
+          >
+          </div>
+
+          <div class="flex items-center justify-between gap-3">
+            <Tag label={categoryLabels[project.category]} tone="accent" />
+            {
+              project.status && (
+                <span class="font-mono text-xs text-subtle">
+                  {project.status}
+                </span>
+              )
+            }
+          </div>
+
+          <h3 class="mt-4 text-xl font-semibold text-fg">{project.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-muted">
+            {project.summary}
+          </p>
+
+          <ul class="mt-4 flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <li>
+                <Tag label={tag} />
+              </li>
+            ))}
+          </ul>
+
+          {
+            (project.repo || project.demo) && (
+              <div class="mt-5 flex flex-wrap gap-4 text-sm">
+                {project.repo && (
+                  <a
+                    href={project.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-underline text-accent"
+                    data-cursor="link"
+                  >
+                    código ↗
+                  </a>
+                )}
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link-underline text-accent"
+                    data-cursor="link"
+                  >
+                    demo ↗
+                  </a>
+                )}
+              </div>
+            )
+          }
+        </article>
+      ))
+    }
+  </div>
+</Section>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  label: string;
+  tone?: "default" | "accent";
+}
+
+const { label, tone = "default" } = Astro.props;
+
+const tones = {
+  default: "border-border bg-white/[0.03] text-muted",
+  accent: "border-accent/30 bg-accent/10 text-accent",
+};
+---
+
+<span
+  class={`inline-flex items-center rounded-full border px-2.5 py-1 font-mono text-[11px] leading-none ${tones[tone]}`}
+>
+  {label}
+</span>
