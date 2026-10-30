@@ -49,7 +49,19 @@ const { kicker, tagline, secondary, chips } = site.hero;
 
     <div class="relative mx-auto w-48 sm:w-56 md:w-full md:max-w-[300px]" data-reveal>
       <div class="absolute inset-4 -z-10 rounded-full bg-accent/20 blur-3xl" aria-hidden="true"></div>
-      <div class="relative rounded-[2rem] border border-border bg-bg-elev/70 p-2 shadow-[var(--shadow-glow)]">
+      <div
+        class="relative overflow-hidden rounded-[2rem] border border-border bg-bg-elev/70 p-2 shadow-[var(--shadow-glow)] transition-colors duration-300 hover:border-accent/50"
+        data-tilt
+        data-tilt-max="7"
+        data-spotlight
+      >
+        <div
+          data-tilt-glare
+          class="pointer-events-none absolute inset-0 rounded-[2rem] opacity-0"
+          style="transition: opacity 200ms ease"
+          aria-hidden="true"
+        >
+        </div>
         <img
           src="/avatar.svg"
           alt="Avatar de KalilPock: janela de terminal com prompt"
@@ -61,9 +73,14 @@ const { kicker, tagline, secondary, chips } = site.hero;
         />
         <div class="grid-backdrop pointer-events-none absolute inset-0 rounded-[2rem] opacity-40" aria-hidden="true"></div>
       </div>
-      <p class="mt-4 text-center font-mono text-[11px] text-subtle">
+      <div class="mt-4 flex items-center justify-center gap-2 font-mono text-[11px] text-subtle">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-2 opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-accent-2"></span>
+        </span>
         <span class="text-accent">~</span>/kalilpock
-      </p>
+        <span class="text-subtle/80">· disponível</span>
+      </div>
     </div>
   </div>
 </section>

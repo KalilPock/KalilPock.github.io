@@ -151,11 +151,41 @@
   }
 
   .surface {
+    position: relative;
     background: color-mix(in oklab, var(--color-bg-elev) 82%, transparent);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     backdrop-filter: blur(10px);
+    transition: border-color var(--duration-base) ease, box-shadow var(--duration-base) ease;
+  }
+
+  /* Spotlight radial dinâmico */
+  [data-spotlight] {
+    --spotlight-x: -999px;
+    --spotlight-y: -999px;
+    --spotlight-opacity: 0;
+  }
+
+  [data-spotlight]::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: radial-gradient(
+      480px circle at var(--spotlight-x) var(--spotlight-y),
+      color-mix(in oklab, var(--color-accent) 22%, transparent),
+      transparent 65%
+    );
+    opacity: var(--spotlight-opacity);
+    pointer-events: none;
+    transition: opacity var(--duration-fast) ease;
+    z-index: 0;
+  }
+
+  [data-spotlight] > * {
+    position: relative;
+    z-index: 1;
   }
 
   .text-gradient {
@@ -242,9 +272,14 @@
   .fx-canvas {
     position: fixed;
     inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.7;
+    opacity: 0.9;
   }
 
   .page-layer {

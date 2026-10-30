@@ -1,7 +1,11 @@
+import { initContact } from "./contact";
 import { initCursor } from "./cursor";
 import { initMagnetic } from "./magnetic";
 import { initParticles } from "./particles";
+import { initProjectFilters } from "./projects";
 import { initReveal } from "./reveal";
+import { initScrollSpy } from "./scrollspy";
+import { initSpotlight } from "./spotlight";
 import { initTilt } from "./tilt";
 
 let booted = false;
@@ -22,6 +26,10 @@ function boot(): void {
 
     initMagnetic();
     initTilt();
+    initSpotlight();
+    initScrollSpy();
+    initProjectFilters();
+    initContact();
     initReveal();
   } catch (error) {
     console.error("[fx] falha ao inicializar efeitos", error);

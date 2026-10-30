@@ -10,6 +10,13 @@ const categoryLabels: Record<ProjectCategory, string> = {
   homelab: "homelab",
   "ci-cd": "ci/cd",
 };
+
+const filterTabs = [
+  { id: "all", label: "Todos" },
+  { id: "fullstack", label: "Full Stack" },
+  { id: "homelab", label: "Homelab" },
+  { id: "ci-cd", label: "CI/CD" },
+];
 ---
 
 <Section id="projetos" label="Projetos">
@@ -19,14 +26,35 @@ const categoryLabels: Record<ProjectCategory, string> = {
     description="Do sistema de anotações ao homelab que roda meus serviços."
   />
 
-  <div class="mt-12 grid gap-5 md:grid-cols-2">
+  <div class="mt-8 flex flex-wrap items-center gap-2" data-reveal>
+    {
+      filterTabs.map((tab, idx) => (
+        <button
+          type="button"
+          data-project-filter={tab.id}
+          aria-pressed={idx === 0 ? "true" : "false"}
+          class={`rounded-full border px-3.5 py-1.5 font-mono text-xs transition-all duration-200 focus-visible:outline-none ${
+            idx === 0
+              ? "border-accent bg-accent/10 text-accent"
+              : "border-border bg-transparent text-muted hover:border-accent/40 hover:text-fg"
+          }`}
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="mt-8 grid gap-5 md:grid-cols-2">
     {
       projects.map((project) => (
         <article
-          class="surface group relative overflow-hidden p-6"
+          class="surface group relative overflow-hidden p-6 transition-opacity duration-200"
           data-reveal
           data-tilt
-          data-tilt-max="6"
+          data-tilt-max="5"
+          data-spotlight
+          data-project-category={project.category}
         >
           <div
             data-tilt-glare

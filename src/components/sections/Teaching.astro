@@ -17,7 +17,11 @@ import Tag from "@components/ui/Tag.astro";
       {teaching.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
 
-    <div class="surface p-5" data-reveal>
+    <div
+      class="surface relative overflow-hidden p-5 transition-colors duration-200"
+      data-reveal
+      data-spotlight
+    >
       <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-subtle">
         Na sala de aula
       </p>

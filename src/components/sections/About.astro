@@ -21,7 +21,10 @@ const { paragraphs, facts } = site.about;
     <dl class="grid content-start gap-3" data-reveal>
       {
         facts.map((fact) => (
-          <div class="surface p-4">
+          <div
+            class="surface relative overflow-hidden p-4 transition-colors duration-200"
+            data-spotlight
+          >
             <dt class="font-mono text-[11px] uppercase tracking-[0.14em] text-subtle">
               {fact.label}
             </dt>

@@ -15,7 +15,20 @@ import Tag from "@components/ui/Tag.astro";
   <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {
       stack.map((group) => (
-        <div class="surface p-5" data-reveal>
+        <div
+          class="surface relative overflow-hidden p-5 transition-transform duration-200"
+          data-reveal
+          data-spotlight
+          data-tilt
+          data-tilt-max="4"
+        >
+          <div
+            data-tilt-glare
+            class="pointer-events-none absolute inset-0 rounded-[var(--radius-lg)] opacity-0"
+            style="transition: opacity 200ms ease"
+            aria-hidden="true"
+          >
+          </div>
           <h3 class="text-base font-semibold text-fg">{group.title}</h3>
           <p class="mt-1 text-xs text-subtle">{group.blurb}</p>
           <ul class="mt-4 flex flex-wrap gap-1.5">

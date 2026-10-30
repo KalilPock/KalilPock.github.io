@@ -5,7 +5,11 @@ import Button from "@components/ui/Button.astro";
 ---
 
 <Section id="contato" label="Contato">
-  <div class="surface relative overflow-hidden p-8 md:p-12" data-reveal>
+  <div
+    class="surface relative overflow-hidden p-8 transition-colors duration-200 md:p-12"
+    data-reveal
+    data-spotlight
+  >
     <div
       class="pointer-events-none absolute -right-24 -top-28 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
       aria-hidden="true"
@@ -34,6 +38,21 @@ import Button from "@components/ui/Button.astro";
       <Button href={`mailto:${site.email}`} variant="ghost">
         E-mail
       </Button>
+
+      <button
+        type="button"
+        id="copy-email-btn"
+        data-copy-text={site.email}
+        class="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-white/[0.02] px-4 py-2.5 text-sm font-medium text-fg transition-all duration-200 hover:border-accent/50 hover:text-accent focus-visible:outline-none"
+        data-magnetic="0.2"
+        data-cursor="link"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+        </svg>
+        <span id="copy-email-label">Copiar e-mail</span>
+      </button>
     </div>
 
     <p class="mt-5 font-mono text-xs text-subtle">{site.email}</p>
